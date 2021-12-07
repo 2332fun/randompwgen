@@ -1,22 +1,8 @@
-//MY CODE:
-//var/function generatePassword = ?
-//if (pwLength > 128 || pwLength < 8) {
-//  alert("Your password needs to be between 8 and 128 characters!");
-//return false;
-// }
-
-//if (pwLower === true) {
-//code to allow lowercase characters
-//}
-
-//if (pwLower === false) {
-//code to not allow lowercase characters
-//}
-
-
-//PRE-MADE CODE:
-// Get references to the #generate element; global variables
+//GLOBAL VARIABLES
+// Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
+
+//GLOBAL ARRAYS
 var pwLowerArray = ["a", "b", "c", "d", ];
 var pwUpperArray = ["A", "B", "C"];
 var pwNumberArray = ["1", "2", "3"];
@@ -24,30 +10,33 @@ var pwSpecialArray = ["!", '"', "#", "$", "%", "%", "&", "'", "(", ")", "*", "+"
 
 
 
-
+//Function to Prompt the user for Password Parameters
 function userInput() {
   var pwLength = prompt("What's your password length?");
-  //check for not a number
+  //check if the input for the pw length is not a number
   if (isNaN(pwLength)) {
     alert("You cannot use non-numbers for the length");
     return;
   }
+  //check if the input for the pw length is between 8 and 128
   if (pwLength > 128 || pwLength < 8) {
     alert("Your password needs to be between 8 and 128 characters");
     return;
   }
-  //check for lowercase
-  var pwLower = confirm("Do you want the password to use lowercase characters?");
-  //check for uppercase
-  var pwUpper = confirm("Do you want the password to use uppercase characters?");
-  //check for numbers
-  var pwNumeric = confirm("Do you want the password to use numbers?");
-  //check for specialchar
-  var pwSpecial = confirm("Do you want the password to use special characters?");
+  //check for lowercase boolean
+  var pwLower = confirm("Do you want the password to use LOWERCASE characters?");
+  //check for uppercase boolean
+  var pwUpper = confirm("Do you want the password to use UPPERCASE characters?");
+  //check for numbers boolean
+  var pwNumeric = confirm("Do you want the password to use NUMBERS?");
+  //check for special characters boolean
+  var pwSpecial = confirm("Do you want the password to use SPECIAL characters?");
+  //check if all booleans were made false
   if (pwLower === false && pwUpper === false && pwNumeric === false && pwSpecial === false) {
     alert("Your password cannot have no characters.");
     return;    
   }
+  //put all boolean variables into one object variable
   var objUserData = {
     pwLength: pwLength,
     pwLower: pwLower,
@@ -59,8 +48,7 @@ function userInput() {
   return objUserData;
 }
 
-
-
+//Function to loop choices/arrays
 function generatePassword() {
   var userPWData = userInput();
 
@@ -87,6 +75,7 @@ function generatePassword() {
 
 }
 
+//Function to use Math to randomize the arrays
 function randomizeArray(array) {
   var randomIndex = Math.floor(Math.random() * array.length);
   var randomCharacter = array[randomIndex];
@@ -105,17 +94,8 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-//console.dir();
-
 
 //ASSIGNMENT CRITERIA:
-//var passwordcriteria
-
-
-
-   // At least 1 type should be true, when all answered, generate password
-  //  Display password to alert
-
 //GIVEN I need a new, secure password
 //WHEN I click the button to generate a password
 //THEN I am presented with a series of prompts for password criteria
