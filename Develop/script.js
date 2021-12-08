@@ -3,12 +3,10 @@
 var generateBtn = document.querySelector("#generate");
 
 //GLOBAL ARRAYS
-var pwLowerArray = ["a", "b", "c", "d", ];
-var pwUpperArray = ["A", "B", "C"];
-var pwNumberArray = ["1", "2", "3"];
+var pwLowerArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var pwUpperArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var pwNumberArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 var pwSpecialArray = ["!", '"', "#", "$", "%", "%", "&", "'", "(", ")", "*", "+", ",", "?", "@", "^", "~"];
-
-
 
 //Function to Prompt the user for Password Parameters
 function userInput() {
@@ -56,20 +54,40 @@ function generatePassword() {
   var userChoices = [];
   var mustUseOne = [];
 
-  // if to check for lower
-
+  // if to check for lower array
   if(userPWData.pwLower) {
     userChoices = userChoices.concat(pwLowerArray);
     mustUseOne.push(randomizeArray(pwLowerArray));
   }
 
-  // complete for other options
+  // if to check for upper array
+  if(userPWData.pwUpper) {
+    userChoices = userChoices.concat(pwUpperArray);
+    mustUseOne.push(randomizeArray(pwUpperArray));
+  }
 
-  // for loop to go through userChoices array 
-  //push those into pwresult
+  // if to check for numeric array
+  if(userPWData.pwNumeric) {
+    userChoices = userChoices.concat(pwNumberArray);
+    mustUseOne.push(randomizeArray(pwNumberArray));
+  }
+
+  // if to check for special array
+  if(userPWData.pwSpecial) {
+    userChoices = userChoices.concat(pwSpecialArray);
+    mustUseOne.push(randomizeArray(pwSpecialArray));
+  }
+
+  //for loop for userChoices array and push into pwresult
+  for (i = 0; i < userPWData.pwLength; i++) {
+    var pwLengthrandomized = randomizeArray(userChoices);
+    pwResult.push(pwLengthrandomized);
+  }
 
   // for loop to go through mustUseOne array
-  //result[i] = mustUseOne[i]
+  for (i = 0; i < mustUseOne.length; i++) {
+    pwResult[i] = mustUseOne[i];
+  }
 
   return pwResult.join('')
 
@@ -93,24 +111,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-//ASSIGNMENT CRITERIA:
-//GIVEN I need a new, secure password
-//WHEN I click the button to generate a password
-//THEN I am presented with a series of prompts for password criteria
-//WHEN prompted for password criteria
-//THEN I select which criteria to include in the password
-//WHEN prompted for the length of the password
-//THEN I choose a length of at least 8 characters and no more than 128 characters
-//WHEN asked for character types to include in the password
-//THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
-//WHEN I answer each prompt
-//THEN my input should be validated and at least one character type should be selected
-//WHEN all prompts are answered
-//THEN a password is generated that matches the selected criteria
-//WHEN the password is generated
-//THEN the password is either displayed in an alert or written to the page
 
 
 
